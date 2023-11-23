@@ -31,12 +31,12 @@ public class MemberService {
 		if (member.getUserName() == null || member.getUserName().trim().isEmpty()) {
 			return "이름을 입력하세요";
 		}
-		if (!member.getId().matches("^[a-zA-Z0-9]{6,20}$")) {
-	        return "아이디 양식 확인해 주세요";
-	    }
-		if (member.getPw().length() < 8 || member.getPw().length() > 20) {
-	        return "비밀번호 양식 확인해 주세요";
-	    }
+//		if (!member.getId().matches("^[a-zA-Z0-9]{6,20}$")) {
+//	        return "아이디 양식 확인해 주세요";
+//	    }
+//		if (member.getPw().length() < 8 || member.getPw().length() > 20) {
+//	        return "비밀번호 양식 확인해 주세요";
+//	    }
 
 		List<MemberDTO> existEmailList = checkExistEmail(member.getEmail());
 		if (!existEmailList.isEmpty()) {
