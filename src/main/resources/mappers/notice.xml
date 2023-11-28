@@ -28,7 +28,7 @@
 		</selectKey>
 		INSERT INTO Notice_bowfun
 		VALUES(#{no}, #{title},
-		#{content}, #{id}, sysdate, 0, #{fileName})
+		#{content}, #{id}, #{writeDate}, 0, #{fileName})
 	</insert>
 
 	<select id="NoticeContent" resultMap="Notice_bowfun">

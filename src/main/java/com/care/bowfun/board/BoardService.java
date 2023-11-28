@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 public class BoardService {
 	@Autowired
 	private BoardMapper mapper;
-	private String filePath = "C:\\javas\\upload\\";
+	private String filePath = "/opt/tomcat/tomcat-10/webapps/upload/";
 
 	public void boardForm(String cp, Model model) {
 		int currentPage = 1;
@@ -93,7 +93,7 @@ public class BoardService {
 				f.mkdir();
 			}
 
-			String fullPath = fileSaveDirectory + "\\" + fileTime + fileName;
+			String fullPath = fileSaveDirectory + "/" + fileTime + fileName;
 			board.setFileName(fullPath);
 			f = new File(fullPath);
 			try {
@@ -123,14 +123,14 @@ public class BoardService {
 			mapper.incrementViews(n);
 			board.setViews(board.getViews() + 1);
 
-			if (board.getFileName() != null) {
-				String[] names = board.getFileName().split("\\\\");
+			if (board.getFileName() != null && board.getFileName().trim().isEmpty() == false) {
+				String[] names = board.getFileName().split("/");
 				for (String name : names)
 					System.out.println("BoardService-boardContent name : " + name);
 				/* C:\\javas\\upload\\user4\\20230925140126-pom.xml */
 
 				/* 20230925140126-01-pom-v01.xml */
-				String[] fileNames = names[4].split("-", 2);
+				String[] fileNames = names[7].split("-", 2);
 				for (String fileName : fileNames)
 					System.out.println("BoardService-boardContent fileName : " + fileName);
 
@@ -152,8 +152,8 @@ public class BoardService {
 		if (fullPath == null)
 			return;
 
-		String[] names = fullPath.split("\\\\");
-		String[] fileNames = names[4].split("-", 2);
+		String[] names = fullPath.split("/");
+		String[] fileNames = names[7].split("-", 2);
 
 		try {
 			File file = new File(fullPath);
@@ -186,9 +186,9 @@ public class BoardService {
 		if (board == null)
 			return "redirect:boardForm";
 
-		if (board.getFileName() != null) {
-			String[] names = board.getFileName().split("\\\\");
-			String[] fileNames = names[4].split("-", 2);
+		if (board.getFileName() != null && board.getFileName().trim().isEmpty() == false) {
+			String[] names = board.getFileName().split("/");
+			String[] fileNames = names[7].split("-", 2);
 			board.setFileName(fileNames[1]);
 		}
 

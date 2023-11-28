@@ -20,7 +20,7 @@
 <!-- 	</update> -->
 	<update id="updateQuantity"
 		parameterType="com.care.bowfun.cart.CartDTO">
-		UPDATE CART_BOWFUN
+		UPDATE cart_bowfun
 		SET quantity = #{quantity}
 		WHERE mem_id = #{memId} AND item_code = #{itemCode}
 	</update>
@@ -31,7 +31,7 @@
 	</select>
 	
 	<delete id="deleteCart" parameterType="com.care.bowfun.cart.CartDTO">
-	    DELETE FROM cart_BOWFUN WHERE item_code = #{itemCode} AND MEM_ID = #{id}
+	    DELETE FROM cart_bowfun WHERE item_code = #{itemCode} AND MEM_ID = #{id}
 	</delete>
 	
 	<select id="tan" resultMap="cart_bowfun">

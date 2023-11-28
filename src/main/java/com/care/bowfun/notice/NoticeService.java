@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 public class NoticeService {
 	@Autowired
 	private NoticeMapper mapper;
-	private String filePath = "C:\\javas\\upload\\";
+	private String filePath = "/opt/tomcat/tomcat-10/webapps/upload/";
 
 	public void NoticeForm(String cp, Model model) {
 		int currentPage = 1;
@@ -95,7 +95,7 @@ public class NoticeService {
 				f.mkdir();
 			}
 
-			String fullPath = fileSaveDirectory + "\\" + fileTime + fileName;
+			String fullPath = fileSaveDirectory + "/" + fileTime + fileName;
 			Notice.setFileName(fullPath);
 			f = new File(fullPath);
 			try {
@@ -130,14 +130,14 @@ public class NoticeService {
 			mapper.incrementViews(n);
 			Notice.setViews(Notice.getViews() + 1);
 
-			if (Notice.getFileName() != null) {
-				String[] names = Notice.getFileName().split("\\\\");
+			if (Notice.getFileName() != null && Notice.getFileName().trim().isEmpty() == false) {
+				String[] names = Notice.getFileName().split("/");
 				for (String name : names)
 					System.out.println("NoticeService-NoticeContent name : " + name);
 				/* C:\\javas\\upload\\user4\\20230925140126-pom.xml */
 
 				/* 20230925140126-01-pom-v01.xml */
-				String[] fileNames = names[4].split("-", 2);
+				String[] fileNames = names[7].split("-", 2);
 				for (String fileName : fileNames)
 					System.out.println("NoticeService-NoticeContent fileName : " + fileName);
 
@@ -159,8 +159,8 @@ public class NoticeService {
 		if (fullPath == null)
 			return;
 
-		String[] names = fullPath.split("\\\\");
-		String[] fileNames = names[4].split("-", 2);
+		String[] names = fullPath.split("/");
+		String[] fileNames = names[7].split("-", 2);
 
 		try {
 			File file = new File(fullPath);
@@ -195,9 +195,9 @@ public class NoticeService {
 			// sessionId = "admin";
 			return "redirect:NoticeForm";
 
-		if (Notice.getFileName() != null) {
-			String[] names = Notice.getFileName().split("\\\\");
-			String[] fileNames = names[4].split("-", 2);
+		if (Notice.getFileName() != null && Notice.getFileName().trim().isEmpty() == false) {
+			String[] names = Notice.getFileName().split("/");
+			String[] fileNames = names[7].split("-", 2);
 			Notice.setFileName(fileNames[1]);
 		}
 

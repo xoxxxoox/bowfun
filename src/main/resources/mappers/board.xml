@@ -22,7 +22,7 @@
          SELECT NVL(max(no), 0)+1 FROM board_bowfun
       </selectKey>
       INSERT INTO board_bowfun
-      VALUES(#{no}, #{title}, #{content}, #{id}, sysdate, 0, #{fileName})
+      VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName})
    </insert>
    
    <select id="boardContent" resultMap="board_bowfun">

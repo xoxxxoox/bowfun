@@ -21,8 +21,8 @@
 	</select>
 
 	<insert id="shopWriteProc">
-		insert into shop_bowfun values(#{cnum}, #{code},
-		#{cname}, #{cimage}, #{cimage1}, #{cprice})
+		insert into shop_bowfun(cnum, code, cname, cimage, cimage1, cprice) 
+		values(#{cnum}, #{code}, #{cname}, #{cimage}, #{cimage1}, #{cprice})
 	</insert>
 
 	<update id="shopUpdateProc">
@@ -36,7 +36,7 @@
 
 	<!-- 카테고리 리스트 -->
 	<select id="cateList">
-		SELECT * FROM category_bowfun
+		SELECT * FROM CATEGORY_BOWFUN
 	</select>
 
 	<select id="totalCount">
@@ -45,7 +45,7 @@
 
 	<select id="kdetail" resultMap="shop_bowfun">
 		SELECT * FROM CATEGORY_BOWFUN C,
-		SHOP_BOWFUN A
+		shop_bowfun A
 		WHERE A.CODE=C.CODE AND A.CNUM = #{cnum}
 	</select>
 
@@ -63,7 +63,7 @@
 
 
 	<select id="getShopItems" resultMap="shop_bowfun">
-		SELECT * FROM SHOP_BOWFUN
+		SELECT * FROM shop_bowfun
 	</select>
 
 	<select id="getCombinedItems"
@@ -72,11 +72,11 @@
 		A.CNUM, C.CATENAME, A.CNAME, A.CIMAGE, A.CIMAGE1, A.CPRICE,
 		B.item_code AS itemCode, B.quantity
 		FROM
-		SHOP_BOWFUN A
+		shop_bowfun A
 		JOIN
-		cart_BOWFUN B ON A.cnum = B.item_code
+		cart_bowfun B ON A.cnum = B.item_code
 		JOIN
-		category_bowfun C ON A.CODE = C.CODE
+		CATEGORY_BOWFUN C ON A.CODE = C.CODE
 		WHERE
 		B.MEM_ID = #{memId}
 	</select>

@@ -26,7 +26,7 @@ public class ShopService {
 	@Autowired
 	private HttpSession session;
 
-	private String filePath = "C:\\javas\\boot-workspace\\bowfun\\src\\main\\resources\\static\\img\\";
+	private String filePath = "/opt/tomcat/tomcat-10/webapps/upload/";
 	@Autowired
 	private CartService cartService;
 
@@ -129,9 +129,8 @@ public class ShopService {
 				f.mkdir();
 			}
 
-			String fullPath = fileSaveDirectory + "\\" + fileTime + fileName;
-			shop.setCimage(fullPath.replace("\\", "/")
-					.replace("C:/javas/boot-workspace/bowfun/src/main/resources/static/", ""));
+			String fullPath = fileSaveDirectory + "/" + fileTime + fileName;
+			shop.setCimage(fullPath);
 			f = new File(fullPath);
 			try {
 				file.transferTo(f);
@@ -162,9 +161,8 @@ public class ShopService {
 				f1.mkdir();
 			}
 
-			String fullPath1 = fileSaveDirectory1 + "\\" + fileTime1 + fileName1;
-			shop.setCimage1(fullPath1.replace("\\", "/")
-					.replace("C:/javas/boot-workspace/bowfun/src/main/resources/static/", ""));
+			String fullPath1 = fileSaveDirectory1 + "/" + fileTime1 + fileName1;
+			shop.setCimage1(fullPath1);
 			f1 = new File(fullPath1);
 			try {
 				file1.transferTo(f1);
@@ -202,8 +200,7 @@ public class ShopService {
 		shop.setCname(multi.getParameter("cname"));
 		shop.setCprice(Integer.parseInt(multi.getParameter("cprice")));
 		
-		String deletePath = shop.getCimage()
-				.replace("img", "C:/javas/boot-workspace/bowfun/src/main/resources/static/img").replace("/", "\\");
+		String deletePath = shop.getCimage();
 		System.out.println(deletePath);
 		if (deletePath != null) {
 			File df = new File(deletePath);
@@ -211,8 +208,7 @@ public class ShopService {
 				df.delete();
 		}
 		
-		String deletePath1 = shop.getCimage1()
-				.replace("img", "C:/javas/boot-workspace/bowfun/src/main/resources/static/img").replace("/", "\\");
+		String deletePath1 = shop.getCimage1();
 		System.out.println(deletePath1);
 		if (deletePath1 != null) {
 			File df1 = new File(deletePath1);
@@ -239,9 +235,8 @@ public class ShopService {
 				f.mkdir();
 			}
 
-			String fullPath = fileSaveDirectory + "\\" + fileTime + fileName;
-			shop.setCimage(fullPath.replace("\\", "/")
-					.replace("C:/javas/boot-workspace/bowfun/src/main/resources/static/", ""));
+			String fullPath = fileSaveDirectory + "/" + fileTime + fileName;
+			shop.setCimage(fullPath);
 			f = new File(fullPath);
 			try {
 				file.transferTo(f);
@@ -271,9 +266,8 @@ public class ShopService {
 				f1.mkdir();
 			}
 
-			String fullPath1 = fileSaveDirectory1 + "\\" + fileTime1 + fileName1;
-			shop.setCimage1(fullPath1.replace("\\", "/")
-					.replace("C:/javas/boot-workspace/bowfun/src/main/resources/static/", ""));
+			String fullPath1 = fileSaveDirectory1 + "/" + fileTime1 + fileName1;
+			shop.setCimage1(fullPath1);
 			f1 = new File(fullPath1);
 			try {
 				file1.transferTo(f1);
@@ -303,16 +297,14 @@ public class ShopService {
 		if (shop == null)
 			return "다시 시도하세요";
 
-		String deletePath = shop.getCimage()
-				.replace("img", "C:/javas/boot-workspace/bowfun/src/main/resources/static/img").replace("/", "\\");
+		String deletePath = shop.getCimage();
 		System.out.println(deletePath);
 		if (deletePath != null) {
 			File f = new File(deletePath);
 			if (f.exists() == true)
 				f.delete();
 		}
-		String deletePath1 = shop.getCimage1()
-				.replace("img", "C:/javas/boot-workspace/bowfun/src/main/resources/static/img").replace("/", "\\");
+		String deletePath1 = shop.getCimage1();
 		System.out.println(deletePath1);
 		if (deletePath1 != null) {
 			File f1 = new File(deletePath1);
